@@ -5,17 +5,48 @@ class VSlider {
   int initPosY = 9;
   int posX;
   
+  int SliderYlong = 80;
+  
+  
   float by = 80-15+initPosY;
   
-  VSlider (int x) {  
-    posX = x; 
+  NetAddress direccionRemota;
+  OscP5 osc;
+
+  String port = "/Slider/Harmony/";
+  
+  VSlider(int x, int numberSlider,
+  OscP5 oscP5, NetAddress direccion) {  
+    posX = x;
+    
+    direccionRemota = direccion;
+    osc = oscP5;
+    
+    port = port+numberSlider;
   } 
   
-  void update() { 
+  void namePort(String nameport){
+    port = "/Slider/"+nameport;
+  }
+  
+  void sedSliderYlong(int Yvalue){
+    SliderYlong = Yvalue;
+  }
+  
+  void update() {
+    pushStyle();
+      fill(255);
+      noStroke();
+      rect(posX,initPosY+(SliderYlong/2),
+        50,5);
+    popStyle();
+    
     pushStyle();
       noStroke();
-      rect(posX+15,initPosY,20,80,25);
+      rect(posX+15,initPosY,
+        20,SliderYlong,25);
     popStyle();
+    
     pushStyle();
       fill(#72C4C6);
       rect(posX,by,50,15,5);
@@ -23,11 +54,13 @@ class VSlider {
     
     if(
       mouseX > posX && mouseX < posX+50 &&
-      mouseY > initPosY && mouseY < initPosY+80
+      mouseY > initPosY && mouseY < initPosY+SliderYlong
     ) {
       overBox = true;
     }else overBox = false;
     allEventMouse();
+    
+    
   }
   
   void allEventMouse() {
@@ -41,13 +74,26 @@ class VSlider {
   
   void mouseDragged() {
     if(locked) {
-      if(by >= initPosY && by <= initPosY+65){
+      if(by >= initPosY && by <= initPosY+(SliderYlong-15)){
         by = mouseY-yOffset;
       }
       if(by < initPosY){by = 0;}
-      if(by > initPosY+65){by = initPosY+65;}
+      if(by > initPosY+(SliderYlong-15)){by = initPosY+SliderYlong-15;}
     }
-    float value = map(by, 10.0,initPosY+65, 100, 0);
-    println(value);
+    //float value = map(by, 10.0,initPosY+65, 100, 0);
+    //println(value);
+    
+    oscValue();
+  }
+  
+  void oscValue(){
+    OscMessage VSMessage = new OscMessage(port);
+    //float value = map(by, 10.0,initPosY+65, 100, 0);
+    
+    float value = map(by, 10.0,initPosY+(SliderYlong-15), 1, 0);
+    
+    //println(value);
+    VSMessage.add(value);
+    osc.send(VSMessage, direccionRemota);
   }
 }

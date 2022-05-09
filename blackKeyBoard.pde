@@ -1,4 +1,7 @@
 int keyb_x = 25, keyb_y = 100;
+
+int addposition = 20;
+
 void blackKeyBoard(int oct){
   
   boolean[] listkb ={false,true,true,false,true,true,true};
@@ -19,8 +22,8 @@ void blackKeyBoard(int oct){
         
         if (mousePressed && (mouseButton == LEFT)) {
           if(
-          mouseX >= (50*nbucle)-12.5 && 
-          mouseX <= (((50*nbucle)-12.5)+25) &&
+          mouseX >= (50*nbucle)-12.5 +addposition&& 
+          mouseX <= (((50*nbucle)-12.5)+25) +addposition&&
           mouseY >= 100 &&
           mouseY <= 100+keyb_y
           ){
@@ -44,25 +47,25 @@ void blackKeyBoard(int oct){
 void keyBlack(int posX, char note){
   pushStyle();
     fill(0);
-    rect((50*posX)-12.5,100,keyb_x,keyb_y);
+    rect((50*posX)-12.5+addposition,100,keyb_x,keyb_y);
   popStyle();
   
   pushStyle();
     fill(255);
     textSize(25);
-    text(note,(50*posX)-7.5, 85+keyb_y);
+    text(note,(50*posX)-7.5+addposition, 85+keyb_y);
   popStyle();
 }
 
 void keyPressBlack(int posX, char note){
   pushStyle();
     fill(#C3BBFA);
-    rect((50*posX)-12.5,100,keyb_x,keyb_y);
+    rect((50*posX)-12.5+addposition,100,keyb_x,keyb_y);
   popStyle();
   
   pushStyle();
     fill(255);
     textSize(25);
-    text(note,(50*posX)-7.5, 85+keyb_y);
+    text(note,(50*posX)-7.5+addposition, 85+keyb_y);
   popStyle();
 }
