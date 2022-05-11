@@ -23,10 +23,17 @@ class VSlider {
     osc = oscP5;
     
     port = port+numberSlider;
+    
+    oscValue();
   } 
   
   void namePort(String nameport){
     port = "/Slider/"+nameport;
+  }
+
+  void initY(int posY){
+    initPosY = posY;
+    by = 80-15+initPosY;
   }
   
   void sedSliderYlong(int Yvalue){
@@ -80,17 +87,16 @@ class VSlider {
       if(by < initPosY){by = 0;}
       if(by > initPosY+(SliderYlong-15)){by = initPosY+SliderYlong-15;}
     }
-    //float value = map(by, 10.0,initPosY+65, 100, 0);
-    //println(value);
     
     oscValue();
   }
   
   void oscValue(){
+    println(by);
     OscMessage VSMessage = new OscMessage(port);
     //float value = map(by, 10.0,initPosY+65, 100, 0);
     
-    float value = map(by, 10.0,initPosY+(SliderYlong-15), 1, 0);
+    float value = map(by, initPosY+1,initPosY+(SliderYlong-15), 1, 0);
     
     //println(value);
     VSMessage.add(value);

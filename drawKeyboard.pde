@@ -55,7 +55,7 @@ void initSliders(OscP5 oscP5, NetAddress direccion){
     VSlider VolumenSlider = new VSlider(5,0,oscP5,direccion);
     
     VolumenSlider.namePort("Volumen");
-    VolumenSlider.sedSliderYlong(300);
+    VolumenSlider.sedSliderYlong(380);
     VSliders.add(VolumenSlider);
     
     initSlider = false;
