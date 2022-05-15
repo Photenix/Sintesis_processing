@@ -11,7 +11,9 @@ class Button{
 
   DADSR controllerDADSR;
   
-  Button(int x, boolean y, int note,DADSR objet){
+  VSlider slider;
+  
+  Button(int x, boolean y, int note,DADSR objet, VSlider objslider){
     posX = x;
     note_key = note;
     if(y) posY+=53;
@@ -21,6 +23,8 @@ class Button{
     if(note==0)oscValue();
 
     controllerDADSR = objet;
+    
+    slider = objslider;
   }
   
   void update(){
@@ -54,9 +58,12 @@ class Button{
       fill(#FA9F9F);
       rect(50*posX+addposition,posY,keyw_x,keyw_y,100);
     popStyle();
+    
     oscValue();
     
     controllerDADSR.position(note_key);
+    
+    slider.button(note_key);
   }
   
   void textNote(int note){

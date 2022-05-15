@@ -29,8 +29,6 @@ void setup(){
   
   oscP5 = new OscP5(this, puerto);
   
-  //ListeneroscP5 = new OscP5(this, 1122);
-  
   direccionRemota = new NetAddress(ip, puerto);
   
   KeyMesage = new oscKeyMessage(oscP5,direccionRemota);
@@ -51,7 +49,7 @@ void draw(){
   
   KeyMesage.update();
   
-  initSliders();
+  initButton();
   
   for (int i = buttons.size()-1; i >= 0; i--){
     Button bAll = buttons.get(i);
@@ -63,48 +61,17 @@ void draw(){
   delay.update();
 }
 
-void initSliders(){
+void initButton(){
   if(initButtons){
     
     buttons = new ArrayList<Button>();
     for(int i = 1;i <= 5;i++){
       
-      buttons.add(new Button(i,false,i-1,dadsr));
+      buttons.add(new Button(i,false,i-1,dadsr,delay));
       
-      buttons.add(new Button(i,true,i+4,dadsr));
+      buttons.add(new Button(i,true,i+4,dadsr,delay));
     }
     initButtons = false;
   }
 }
-
-/*
-void oscEvent(OscMessage theOscMessage) {
-  
-  
-  print(" addrpattern: "+theOscMessage.addrPattern());
-  println(" typetag: "+theOscMessage.typetag());
-  
-  
-  if(theOscMessage.checkAddrPattern("/DADSR")) { // si la dirección es "pitch"
-  
-    if(theOscMessage.checkTypetag("iiifi")) { // si el dato que trae el mensaje es un float
-    
-    
-      println("ENTRO PITCH");
-      
-      int delay = theOscMessage.get(0).intValue();
-      int atack = theOscMessage.get(1).intValue();
-      int decay = theOscMessage.get(2).intValue();
-      float sustain = theOscMessage.get(3).floatValue();
-      int release = theOscMessage.get(4).intValue();
-      
-      println(atack);
-      println(decay);
-      println(sustain);
-      println(release);
-      return;
-      }
-    }  
-  }
-  */
   

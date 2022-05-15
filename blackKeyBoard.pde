@@ -20,17 +20,6 @@ void blackKeyBoard(int oct){
       if(x){
         keyBlack(nbucle,keysNote[namelist]);
         
-        if (mousePressed && (mouseButton == LEFT)) {
-          if(
-          mouseX >= (50*nbucle)-12.5 +addposition&& 
-          mouseX <= (((50*nbucle)-12.5)+25) +addposition&&
-          mouseY >= 100 &&
-          mouseY <= 100+keyb_y
-          ){
-            keyPressBlack(nbucle,keysNote[namelist]);
-          }
-        }
-        
         if(keyPressed){
           if(key==keysNote[namelist]) {
             keyPressBlack(nbucle,keysNote[namelist]);

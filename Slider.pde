@@ -8,12 +8,15 @@ class VSlider {
   int SliderYlong = 80;
   
   
-  float by = 80-15+initPosY;
+  float by = SliderYlong-15+initPosY;
   
   NetAddress direccionRemota;
   OscP5 osc;
 
   String port = "/Slider/Harmony/";
+  
+  float[] position = new float[10];
+  int actualPosition =0;
   
   VSlider(int x, int numberSlider,
   OscP5 oscP5, NetAddress direccion) {  
@@ -25,6 +28,10 @@ class VSlider {
     port = port+numberSlider;
     
     oscValue();
+    
+    for(int i=0;i<10;i++){
+      position[i] = by;
+    }
   } 
   
   void namePort(String nameport){
@@ -34,13 +41,27 @@ class VSlider {
   void initY(int posY){
     initPosY = posY;
     by = 80-15+initPosY;
+    
+    for(int i=0;i<10;i++){
+      position[i] = by;
+    }
   }
   
   void sedSliderYlong(int Yvalue){
     SliderYlong = Yvalue;
+    by = SliderYlong-15+initPosY;
+    
+    for(int i=0;i<10;i++){
+      position[i] = by;
+    }
+  }
+  
+  void button(int number){
+    actualPosition = number;
   }
   
   void update() {
+    //Mid del slider
     pushStyle();
       fill(255);
       noStroke();
@@ -48,16 +69,20 @@ class VSlider {
         50,5);
     popStyle();
     
+    //Stik Slider
     pushStyle();
       noStroke();
       rect(posX+15,initPosY,
         20,SliderYlong,25);
     popStyle();
     
+    //Manilla Slider
     pushStyle();
       fill(#72C4C6);
-      rect(posX,by,50,15,5);
+      rect(posX,position[actualPosition],50,15,5);
     popStyle();
+    
+    by = position[actualPosition];
     
     if(
       mouseX > posX && mouseX < posX+50 &&
@@ -89,10 +114,12 @@ class VSlider {
     }
     
     oscValue();
+    
+    position[actualPosition] = by;
   }
   
   void oscValue(){
-    println(by);
+    //println(by);
     OscMessage VSMessage = new OscMessage(port);
     //float value = map(by, 10.0,initPosY+65, 100, 0);
     

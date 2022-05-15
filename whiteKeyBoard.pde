@@ -13,16 +13,6 @@ class keyWhiteClass{
   
   void update(){
     key(posX);
-    if (mousePressed && (mouseButton == LEFT)) {
-      if(
-        mouseX >= 50*posX+addposition && 
-        mouseX <= (50*posX)+50+addposition &&
-        mouseY >= 100 &&
-        mouseY <= 100+keyw_y
-        ){
-        keyPress(posX);
-      }
-    }
     
     if(keyPressed){
       if(key==note_key) {
