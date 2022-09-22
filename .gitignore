@@ -1,1 +1,4 @@
 test/
+out/
+.vscode
+.vscode/**
