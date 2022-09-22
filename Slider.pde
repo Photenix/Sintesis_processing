@@ -1,3 +1,14 @@
+/*
+  Doc JM4P1R0
+  Hola me imagino que queires saber mi codigo jiji
+  para esto empezare con lo siguiente.
+
+  Para esto necesitas
+    int x = posicion de X en nuestro canvas
+    int numberSlider = que sera nuestro identificador del slider un paso muy importante
+    OscP5 oscP5 = este viene incluido solo uno por el programa que es nuestro conector hacia PD
+    NetAddress direccion = este igual que el anterior nos permitira hacer la conexion
+*/
 class VSlider { 
   boolean locked = false; 
   boolean overBox = false;
@@ -47,6 +58,12 @@ class VSlider {
     }
   }
   
+  /* 
+    En processing no tenemos valor por defecto
+    y por esa falta de ello manejamos es un cambio de estado por una funcion,
+    y asi hackiamos processing cuando lo necesitamos ;).
+    PD: la otra opcion seria hacer una clase que heredara los valores de esta, pero eso es otra historia.
+  */
   void sedSliderYlong(int Yvalue){
     SliderYlong = Yvalue;
     by = SliderYlong-15+initPosY;
@@ -61,7 +78,7 @@ class VSlider {
   }
   
   void update() {
-    //Mid del slider
+    //Muestra mid del slider
     pushStyle();
       fill(255);
       noStroke();
@@ -69,14 +86,14 @@ class VSlider {
         50,5);
     popStyle();
     
-    //Stik Slider
+    //Barra Slider
     pushStyle();
       noStroke();
       rect(posX+15,initPosY,
         20,SliderYlong,25);
     popStyle();
     
-    //Manilla Slider
+    //Potenciometro Slider
     pushStyle();
       fill(#72C4C6);
       rect(posX,position[actualPosition],50,15,5);
@@ -91,8 +108,6 @@ class VSlider {
       overBox = true;
     }else overBox = false;
     allEventMouse();
-    
-    
   }
   
   void allEventMouse() {
@@ -118,15 +133,14 @@ class VSlider {
     position[actualPosition] = by;
   }
   
+  // Sera nuestro mensaje osc para cada uno de nuestros slider
   void oscValue(){
     //println(by);
     OscMessage VSMessage = new OscMessage(port);
     //float value = map(by, 10.0,initPosY+65, 100, 0);
-    
     float value = map(by, initPosY+1,initPosY+(SliderYlong-15), 1, 0);
-    
     //println(value);
     VSMessage.add(value);
-    osc.send(VSMessage, direccionRemota);
+    osc.send(VSMessage, direccionRemota); // <=== Envia el mensaje
   }
 }
