@@ -1,0 +1,33 @@
+#N canvas 371 335 450 300 12;
+#X obj 202 177 timer;
+#X obj 202 157 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 232 157 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 150 196 5 0 0 0 - - - 0;
+#X obj 202 84 f 0;
+#X obj 240 84 + 1;
+#X obj 202 107 % 2;
+#X obj 202 129 sel 0 1;
+#X floatatom 264 222 9 0 0 0 - - - 0;
+#X obj 264 196 expr 60000 / $f1;
+#X obj 102 124 bng 20 250 50 0 bTime empty Tempo 20 7 0 10 #ffffff
+#0400ff #000000;
+#X obj 202 55 r bTime;
+#X obj 150 225 outlet ms;
+#X obj 264 247 outlet BPM;
+#X connect 0 0 3 0;
+#X connect 0 0 9 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 1;
+#X connect 3 0 12 0;
+#X connect 4 0 5 0;
+#X connect 4 0 6 0;
+#X connect 5 0 4 1;
+#X connect 6 0 7 0;
+#X connect 7 0 1 0;
+#X connect 7 1 2 0;
+#X connect 8 0 13 0;
+#X connect 9 0 8 0;
+#X connect 11 0 4 0;
+#X coords 0 -1 1 1 62 64 1 100 100;

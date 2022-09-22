@@ -1,0 +1,8 @@
+#N canvas 244 375 450 300 12;
+#X msg 112 182 \; pd dsp \$1;
+#X obj 112 65 loadbang;
+#X obj 112 116 tgl 25 0 empty empty empty 17 7 0 10 #ffc7c6 #551312
+#000000 0 1;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X coords 0 -1 1 1 48 46 1 100 100;

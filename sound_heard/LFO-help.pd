@@ -1,0 +1,17 @@
+#N canvas 490 335 450 285 12;
+#X obj 11 4 cnv 15 200 40 empty empty LFO 20 12 0 20 #00faff #ffffff
+0;
+#X obj 241 30 LFO;
+#X text 11 50 Maneja onda : Sinuidal Diente sierra Dientesierra inverso
+Cuadrada Triangular, f 28;
+#X obj 11 102 cnv 15 200 30 empty empty Hz 20 12 0 20 #ff8300 #ffffff
+0;
+#X text 11 133 Va desde 0 hasta 5 hz;
+#X obj 12 164 cnv 15 200 30 empty empty Inlet 20 12 0 20 #9c00ff #ffffff
+0;
+#X text 12 194 1- pack f(Hzmodul) f(Hzcarry), f 28;
+#X text 12 227 2- f(Hz);
+#X obj 227 164 cnv 15 200 30 empty empty Outlet 20 12 0 20 #9c00ff
+#ffffff 0;
+#X text 227 194 1- modificate Note => f, f 28;
+#X text 227 227 2- type wave => wave~;
